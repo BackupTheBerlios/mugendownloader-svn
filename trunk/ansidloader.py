@@ -146,12 +146,5 @@ class AnsiDloader:
 				save.close()
 				print "SAVED FILE: " + filecheck[0]
 			
-			#print self.file.read()
-
-#run = AnsiDloader()
-#print "SZUKAM PLIKOW"
-#szukane = run.findsub('pukając')
-#print "LISTA PLIKOW"
-#run.show()
 
 

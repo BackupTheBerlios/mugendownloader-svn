@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # main.py
 # Copyright (C) WoodenJesus 2007 <woodenjesus666@gmail.com>
 # 
-# main.py is free software.
+# mugendownlader.py is free software.
 # 
 # You may redistribute it and/or modify it under the terms of the
 # GNU General Public License, as published by the Free Software
@@ -31,7 +31,7 @@ import ansidloader
 import threading, time
 import sys
 
-### http://sebulba.wikispaces.com/recipe+thread2 killing thread	
+### http://sebulba.wikispaces.com/recipe+thread2 killing thread	######
 
 def _async_raise(tid, exctype):
     """raises the exception, performs cleanup if needed"""
@@ -45,7 +45,9 @@ def _async_raise(tid, exctype):
         # and you should call it again with exc=NULL to revert the effect"""
         ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, 0)
         raise SystemError("PyThreadState_SetAsyncExc failed")
+######################################################################
 
+############### From pyGTK FAQ #######################################
 def do_gui_operation(function, *args, **kw):
     def idle_func():
         gtk.threads_enter()
@@ -55,6 +57,8 @@ def do_gui_operation(function, *args, **kw):
         finally:
             gtk.threads_leave()
     gobject.idle_add(idle_func)
+#####################################################################
+
 
 #run download thread
 
@@ -81,7 +85,7 @@ class RunDload ( threading.Thread ):
 		self.join()
 
 
-### http://sebulba.wikispaces.com/recipe+thread2 killing thread	
+### http://sebulba.wikispaces.com/recipe+thread2 killing thread	######
 	def _get_my_tid(self):
 		"""determines this (self's) thread id"""
 		if not self.isAlive():
@@ -107,6 +111,7 @@ class RunDload ( threading.Thread ):
 		"""raises SystemExit in the context of the given thread, which should 
 		cause the thread to exit silently (unless caught)"""
 		self.raise_exc(SystemExit)
+######################################################################
 
 #initialize main window
 class MugenWindow:
@@ -137,7 +142,7 @@ class MugenWindow:
 		
 		self.text = self.output.get_buffer()
 		self.download = RunDload (self.window, (self.find.get_text(), self.dirchooser.get_filename(), self.OutputHandler))
-		#self.text.insert_at_cursor ('LOOOOL')
+
 		
 	def Download (self, button):
 		if not self.download.work.isSet():
@@ -162,14 +167,13 @@ class MugenWindow:
 		dialog.set_name("Mugen ∞ Downloader 0.1")                                                                                                                                                                  
 		dialog.set_copyright("WoodenJesus")
 		dialog.set_comments("Feyd Rautha relase")                                                                                                                                    
-        #dialog.set_website("http://www.pygtk.org./")                                                                                                                                                   
+        dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   
+        
         ## Close dialog on user response                                                                                                                                                               
 		dialog.connect ("response", lambda d, r: d.destroy())                                                                                                                                          
 		dialog.show() 
-        #aboutwindow = self.glade.get_widget('aboutwindow')
-		#print aboutwindow
-		#aboutwindow.connect("response", lambda d, r: d.destroy())
-		#aboutwindow.show()	
+
+
 
 	def Exit(self, *arg):
 		sys.exit(0)	
@@ -182,13 +186,6 @@ class MugenWindow:
 		self.text.insert (self.text.get_end_iter(), string)
 		self.output.scroll_to_iter(self.text.get_end_iter(), 0)
 		
-	
-#		
-#		self.dirchooser.connect("selection-changed", self.lol)
-		
-		#lol = 
-#	def lol (self, hihi):
-#		hihi.get_filename()
 def main():
 	gtk.gdk.threads_init()
 	gtk.gdk.threads_enter()
