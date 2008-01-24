@@ -114,16 +114,18 @@ class AnsiDloader:
 				if len (filecheck) == 1:
 					
 					print self.links[i]
-					checkregex_dir = re.compile ('(.+)[\sep.+|$]')
-					dircheck = checkregex_dir.findall(str(self.links[i][1]))
-					
-					windows_friendly = re.compile ('[\/\\:\*\?"<>\|]')
-					dircheck = windows_friendly.sub(str(self.links[i][1]))
+					checkregex_dir = re.compile ('\sep.+')
+					dircheck = checkregex_dir.sub('', str(self.links[i][1]))
+					dir_friendly = re.compile ('[\/\\:\*\?"<>\|\.]')
+					dircheck = dir_friendly.sub('', dircheck)
 
-					if not os.path.exists(os.path.join(dir, dircheck[0])):
-						os.makedirs (os.path.join(dir, dircheck[0]))
+					print filecheck
+					print dir
+					print dircheck
+					if not os.path.exists(os.path.join(dir, dircheck)):
+						os.makedirs (os.path.join(dir, dircheck))
 					
-					save = open(os.path.join(dir,dircheck[0], filecheck[0]),"wb")
+					save = open(os.path.join(dir,dircheck, filecheck[0]),"wb")
 					save.write (self.file.read())
 					save.close()
 					output ("POBRANO PLIK: " + filecheck[0] + "\n")
