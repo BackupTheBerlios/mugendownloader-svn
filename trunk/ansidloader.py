@@ -29,6 +29,8 @@ from urllib import *
 from cookielib import *
 from codecs import *
 
+import os
+
 def printer(obj):
 	print  obj,
 
@@ -110,7 +112,15 @@ class AnsiDloader:
 				filecheck = checkregex.findall(str(self.file.info()))
 				
 				if len (filecheck) == 1:
-					save = open(dir + filecheck[0],"wb")
+					
+					print self.links[i]
+					checkregex_dir = re.compile ('(.+)[\sep.+|$]')
+					dircheck = checkregex_dir.findall(str(self.links[i][1]))
+
+					if not os.path.exists(os.path.join(dir, dircheck[0])):
+						os.makedirs (os.path.join(dir, dircheck[0]))
+					
+					save = open(os.path.join(dir,dircheck[0], filecheck[0]),"wb")
 					save.write (self.file.read())
 					save.close()
 					output ("POBRANO PLIK: " + filecheck[0] + "\n")
@@ -131,19 +141,4 @@ class AnsiDloader:
 	def kill (self):
 		raise SystemError("PROCESS TERMINATED")
 	
-	def download (self, id, dir = ''):
-		for i in id:
-			post = urlencode ( {'sh': str(self.links[i][3]), 'id': str(self.links[i][0]) } )
-			self.file = self.urlopen (self.mainpage + '/sciagnij.php', post)
-			
-			checkregex = re.compile ('filename=(.+\.zip)')
-			filecheck = checkregex.findall(str(self.file.info()))
-			
-			if len (filecheck) == 1:
-				save = open(dir + filecheck[0],"w")
-				save.write (self.file.read())
-				save.close()
-				print "SAVED FILE: " + filecheck[0]
-			
-
 
