@@ -22,6 +22,7 @@
 # 	Boston, MA  02110-1301, USA.
 
 
+__version__ = '0.2 svn'
 
 import inspect
 import ctypes
@@ -138,6 +139,7 @@ class MugenWindow:
 		
 		self.find = self.glade.get_widget('find')
 		self.dirchooser = self.glade.get_widget('dirchooser')
+		self.pageno = self.glade.get_widget('pageno')
 		self.output = self.glade.get_widget('output')
 		
 		self.text = self.output.get_buffer()
@@ -147,7 +149,7 @@ class MugenWindow:
 	def Download (self, button):
 		if not self.download.work.isSet():
 			if self.find.get_text() != '':
-				self.download = RunDload (self, (self.find.get_text(), self.dirchooser.get_filename(),  self.OutputHandler))
+				self.download = RunDload (self, (self.find.get_text(), self.dirchooser.get_filename(),  self.OutputHandler, self.pageno.get_value() ))
 				self.ok.hide()
 				self.cancel.show()
 				self.download.start()
@@ -164,7 +166,7 @@ class MugenWindow:
 			
 	def About (self, *arg):
 		dialog = gtk.AboutDialog()                                                                                                                                                                     
-		dialog.set_name("Mugen ∞ Downloader 0.1")                                                                                                                                                                  
+		dialog.set_name("Mugen ∞ Downloader " + __version__)                                                                                                                                                                  
 		dialog.set_copyright("WoodenJesus")
 		dialog.set_comments("Feyd Rautha relase")                                                                                                                                    
 		dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   

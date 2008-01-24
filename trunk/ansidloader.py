@@ -45,7 +45,7 @@ class AnsiDloader:
 		
 
 		
-	def findsub (self, string, dir = '', output = printer):
+	def findsub (self, string, dir = '', output = printer, pageno = 0):
 		
 		string = string.replace(' ', '+')
 		string = string.decode ('utf-8')
@@ -53,7 +53,6 @@ class AnsiDloader:
 		if len (dir) != 0:
 			dir =  dir + '/' 
 
-		pagenr = 0
 		done = False 
 		self.links = []
 		self.subtitles_number = 0
@@ -62,10 +61,10 @@ class AnsiDloader:
 			
 			del self.links[:]
 		
-			output ( "\nSTRONA " + str(pagenr) + "\n\n")
+			output ( "\nSTRONA " + str('%10d'% pageno) + "\n\n")
 			
-			page = self.urlopen (self.mainpage + '/szukaj.php?szukane='+string+'&pSortuj=t_ang&od='+ str(pagenr))
-			pagenr = pagenr + 1
+			page = self.urlopen (self.mainpage + '/szukaj.php?szukane='+string+'&pSortuj=t_ang&od='+ str(pageno))
+			pageno = pageno + 1
 			
 			page = page.read()
 			page = page.decode ('iso-8859-2')
