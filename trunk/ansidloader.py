@@ -116,6 +116,9 @@ class AnsiDloader:
 					print self.links[i]
 					checkregex_dir = re.compile ('(.+)[\sep.+|$]')
 					dircheck = checkregex_dir.findall(str(self.links[i][1]))
+					
+					windows_friendly = re.compile ('[\/\\:\*\?"<>\|]')
+					dircheck = windows_friendly.sub(str(self.links[i][1]))
 
 					if not os.path.exists(os.path.join(dir, dircheck[0])):
 						os.makedirs (os.path.join(dir, dircheck[0]))
