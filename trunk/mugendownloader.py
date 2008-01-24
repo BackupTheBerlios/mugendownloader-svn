@@ -167,7 +167,7 @@ class MugenWindow:
 		dialog.set_name("Mugen ∞ Downloader 0.1")                                                                                                                                                                  
 		dialog.set_copyright("WoodenJesus")
 		dialog.set_comments("Feyd Rautha relase")                                                                                                                                    
-        dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   
+		dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   
         
         ## Close dialog on user response                                                                                                                                                               
 		dialog.connect ("response", lambda d, r: d.destroy())                                                                                                                                          
