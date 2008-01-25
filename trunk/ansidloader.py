@@ -125,10 +125,13 @@ class AnsiDloader:
 					if not os.path.exists(os.path.join(dir, dircheck)):
 						os.makedirs (os.path.join(dir, dircheck))
 					
-					save = open(os.path.join(dir,dircheck, filecheck[0]),"wb")
-					save.write (self.file.read())
-					save.close()
-					output ("POBRANO PLIK: " + filecheck[0] + "\n")
+					if not os.path.isfile (os.path.join(dir,dircheck, filecheck[0])):
+						save = open(os.path.join(dir,dircheck, filecheck[0]),"wb")
+						save.write (self.file.read())
+						save.close()
+						output ("POBRANO PLIK: " + filecheck[0] + "\n")
+					else:
+						output ("PLIK ISTNIEJE: " + filecheck[0] + "\n")
 			
 		output ("ILOSC POBRANYCH PLIKOW: " + str(self.subtitles_number) + "\n")		
 						

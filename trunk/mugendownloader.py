@@ -30,7 +30,7 @@ import ctypes
 import pygtk, gtk, gtk.glade, gobject
 import ansidloader
 import threading, time
-import sys
+import sys, os
 
 ### http://sebulba.wikispaces.com/recipe+thread2 killing thread	######
 
@@ -122,8 +122,6 @@ class MugenWindow:
 		self.glade = gtk.glade.XML("interface.glade")
 		self.window = self.glade.get_widget('main')
 		
-		self.window.show()
-		
 		self.exit = self.glade.get_widget('close')
 		self.exit.connect("clicked", self.Exit)
 		self.window.connect ("destroy", self.Exit)
@@ -139,12 +137,29 @@ class MugenWindow:
 		
 		self.find = self.glade.get_widget('find')
 		self.dirchooser = self.glade.get_widget('dirchooser')
+		self.dirchooser.connect("selection-changed", self.UpdateDefault)
+		self.cancel.connect("clicked", self.CancelDownload)
 		self.pageno = self.glade.get_widget('pageno')
 		self.output = self.glade.get_widget('output')
 		
+		if os.path.isfile ('default.conf'):
+			default = open ('default.conf', 'r')
+			dir = default.read()
+			if os.path.isdir (dir):
+				self.dirchooser.set_filename(dir)
+			default.close()
+		
 		self.text = self.output.get_buffer()
 		self.download = RunDload (self.window, (self.find.get_text(), self.dirchooser.get_filename(), self.OutputHandler))
+		
+		self.window.show()
 
+	def UpdateDefault(self, *trash):
+		if os.path.isfile ('default.conf'):
+			os.remove ('default.conf')
+		default = open ('default.conf', 'w')
+		default.write(self.dirchooser.get_filename())
+		default.close()
 		
 	def Download (self, button):
 		if not self.download.work.isSet():
