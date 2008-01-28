@@ -22,7 +22,7 @@
 # 	Boston, MA  02110-1301, USA.
 
 
-__version__ = '0.2 svn'
+__version__ = '0.2'
 
 import inspect
 import ctypes
@@ -183,7 +183,7 @@ class MugenWindow:
 		dialog = gtk.AboutDialog()                                                                                                                                                                     
 		dialog.set_name("Mugen ∞ Downloader " + __version__)                                                                                                                                                                  
 		dialog.set_copyright("WoodenJesus")
-		dialog.set_comments("Feyd Rautha relase")                                                                                                                                    
+		dialog.set_comments("Feyd Rautha strikes back")                                                                                                                                    
 		dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   
         
         ## Close dialog on user response                                                                                                                                                               

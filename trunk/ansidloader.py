@@ -80,7 +80,7 @@ class AnsiDloader:
 				done = True
 				output ('KONIEC\n')
 			
-			self.regex = re.compile ('<a href=\"osoba\.php\?id=\d+\">[~#@]([@\-łąęóżźćń\(\)\s\w]+)</a>')
+			self.regex = re.compile ('<a href=\"osoba\.php\?id=\d+\">[~#@]([@\-łąęóżźćń"\(\)\s\w]+)</a>')
 			self.author = self.regex.findall(page)
 			#print self.author
 			#print len (self.author)
@@ -99,7 +99,7 @@ class AnsiDloader:
 
 			for i in range (0, len(self.id)):
 				self.links.append ((self.id[i], self.name[i], self.author[i], self.sh[i]))
-				self.subtitles_number = self.subtitles_number + 1
+				
 			#done = True 
 			
 			#self.download (range (0, len(run.links)))
@@ -122,6 +122,9 @@ class AnsiDloader:
 					print filecheck
 					print dir
 					print dircheck
+					dircheck = page.decode ('iso-8859-2')
+					#page = page.encode ('utf-8')
+					
 					if not os.path.exists(os.path.join(dir, dircheck)):
 						os.makedirs (os.path.join(dir, dircheck))
 					
@@ -129,6 +132,7 @@ class AnsiDloader:
 						save = open(os.path.join(dir,dircheck, filecheck[0]),"wb")
 						save.write (self.file.read())
 						save.close()
+						self.subtitles_number = self.subtitles_number + 1
 						output ("POBRANO PLIK: " + filecheck[0] + "\n")
 					else:
 						output ("PLIK ISTNIEJE: " + filecheck[0] + "\n")

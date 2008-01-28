@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.1 on Thu Jan 24 20:36:47 2008 -->
+<!--Generated with glade3 3.4.1 on Mon Jan 28 16:04:13 2008 -->
 <glade-interface>
   <widget class="GtkWindow" id="main">
     <property name="width_request">550</property>
@@ -56,7 +56,7 @@
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
             <property name="xalign">0.88999998569488525</property>
-            <property name="label" translatable="yes">&lt;i&gt;"Przerażające jest to co z człowieka czyni nadczłowieka"&lt;/i&gt; - Feyd Rautha</property>
+            <property name="label" translatable="yes">&lt;i&gt;"Najłatwiej przestraszyć się przeciwnika, którego się podziwia."&lt;/i&gt; - Feyd Rautha</property>
             <property name="use_markup">True</property>
           </widget>
           <packing>
@@ -77,17 +77,25 @@
                 <property name="n_rows">2</property>
                 <property name="n_columns">2</property>
                 <child>
-                  <widget class="GtkLabel" id="label3">
+                  <widget class="GtkLabel" id="label6">
                     <property name="height_request">0</property>
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="xalign">0.0099999997764825821</property>
-                    <property name="label" translatable="yes">&lt;i&gt;Zacznij od strony:&lt;/i&gt;</property>
+                    <property name="label" translatable="yes">&lt;i&gt;Poszukiwany ciag:&lt;/i&gt;</property>
                     <property name="use_markup">True</property>
                   </widget>
+                </child>
+                <child>
+                  <widget class="GtkEntry" id="find">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="activates_default">True</property>
+                  </widget>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
                   </packing>
                 </child>
                 <child>
@@ -107,26 +115,18 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkEntry" id="find">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="activates_default">True</property>
-                  </widget>
-                  <packing>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkLabel" id="label6">
+                  <widget class="GtkLabel" id="label3">
                     <property name="height_request">0</property>
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="xalign">0.0099999997764825821</property>
-                    <property name="label" translatable="yes">&lt;i&gt;Poszukiwany ciag:&lt;/i&gt;</property>
+                    <property name="label" translatable="yes">&lt;i&gt;Zacznij od strony:&lt;/i&gt;</property>
                     <property name="use_markup">True</property>
                   </widget>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                  </packing>
                 </child>
               </widget>
               <packing>
