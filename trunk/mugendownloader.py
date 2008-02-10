@@ -213,7 +213,7 @@ class MugenWindow:
 		dialog = gtk.AboutDialog()                                                                                                                                                                     
 		dialog.set_name("Mugen ∞ Downloader " + __version__)                                                                                                                                                                  
 		dialog.set_copyright("WoodenJesus")
-		dialog.set_comments("Feyd Rautha strikes back")                                                                                                                                    
+		dialog.set_comments("Law of Mentat relase")                                                                                                                                    
 		dialog.set_website("http://mugendownloader.berlios.de")                                                                                                                                                   
         
         ## Close dialog on user response                                                                                                                                                               
