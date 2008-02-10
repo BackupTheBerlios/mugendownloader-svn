@@ -47,7 +47,8 @@ class AnsiDloader:
 		
 
 		
-	def findsub (self, string, dir = '', output = printer, pageno = 0):
+	def findsub (self, string, dir = '', output = printer, pageno = 0, Autor = '', od = ('', '', ''), do = ('', '', '')):
+		#http://animesub.info/szukaj.php?pGdzie=1&szukane=%21&pBezSlow=&ID=&pAutor=Freeman&pUdostepnil=&pFormat=&pIleCd=&pOd1=01&pOd2=02&pOd3=2006&pDo1=12&pDo2=31&pDo3=2008&pSortuj=traf
 		
 		string = string.replace(' ', '+')
 		string = string.decode ('utf-8')
@@ -65,7 +66,8 @@ class AnsiDloader:
 		
 			output ( "\nSTRONA " + str('%10d'% pageno) + "\n\n")
 			
-			page = self.urlopen (self.mainpage + '/szukaj.php?szukane='+string+'&pSortuj=t_ang&od='+ str(pageno))
+			page = self.urlopen (self.mainpage + '/szukaj.php?pGdzie=1&szukane='+string+'&pSortuj=t_ang&od='+ str(pageno) + '&pAutor=' + Autor + '&pOd1=' + str(od[2]) +'&pOd2=' + str(od[1] + 1) + '&pOd3=' + str(od[0]) +'&pDo1=' + str(do[2]) + '&pDo2=' + str(do[1] +1 ) + '&pDo3=' +str(do[0]) + '&Sortuj=traf')
+			print self.mainpage + '/szukaj.php?pGdzie=1&szukane='+string+'&pSortuj=t_ang&od='+ str(pageno) + '&pAutor=' + Autor + '&pOd1=' + str(od[2]) +'&pOd2=' + str(od[1] + 1) + '&pOd3=' + str(od[0]) +'&pDo1=' + str(do[2]) + '&pDo2=' + str(do[1] +1 ) + '&pDo3=' +str(do[0]) + '&Sortuj=traf'
 			pageno = pageno + 1
 			
 			page = page.read()
@@ -122,7 +124,7 @@ class AnsiDloader:
 					print filecheck
 					print dir
 					print dircheck
-					dircheck = page.decode ('iso-8859-2')
+					#dircheck = page.decode ('iso-8859-2')
 					#page = page.encode ('utf-8')
 					
 					if not os.path.exists(os.path.join(dir, dircheck)):

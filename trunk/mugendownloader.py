@@ -22,7 +22,7 @@
 # 	Boston, MA  02110-1301, USA.
 
 
-__version__ = '0.2'
+__version__ = '0.3'
 
 import inspect
 import ctypes
@@ -51,12 +51,12 @@ def _async_raise(tid, exctype):
 ############### From pyGTK FAQ #######################################
 def do_gui_operation(function, *args, **kw):
     def idle_func():
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
         try:
             function(*args, **kw)
             return False
         finally:
-            gtk.threads_leave()
+            gtk.gdk.threads_leave()
     gobject.idle_add(idle_func)
 #####################################################################
 
@@ -135,6 +135,17 @@ class MugenWindow:
 		self.cancel = self.glade.get_widget('cancel')
 		self.cancel.connect("clicked", self.CancelDownload)
 		
+		self.selectOd = self.glade.get_widget('selectOd')
+		self.selectDo = self.glade.get_widget('selectDo')
+		
+		self.autor = self.glade.get_widget('autor')
+		
+		self.activateOd = self.glade.get_widget('activateOd')
+		self.activateDo = self.glade.get_widget('activateDo')
+		
+		self.activateOd.connect("toggled", self.CalendarHandle, self.selectOd)
+		self.activateDo.connect("toggled", self.CalendarHandle, self.selectDo)
+		
 		self.find = self.glade.get_widget('find')
 		self.dirchooser = self.glade.get_widget('dirchooser')
 		self.dirchooser.connect("selection-changed", self.UpdateDefault)
@@ -164,7 +175,19 @@ class MugenWindow:
 	def Download (self, button):
 		if not self.download.work.isSet():
 			if self.find.get_text() != '':
-				self.download = RunDload (self, (self.find.get_text(), self.dirchooser.get_filename(),  self.OutputHandler, self.pageno.get_value() ))
+				
+				od = (0, 0, 0)
+				do = (0, 0, 0)
+				
+				if self.activateOd.get_active() == True:
+					od = self.selectOd.get_date()
+					#od[1] = od[1] + 1
+					
+				if self.activateDo.get_active() == True:
+					do = self.selectDo.get_date()	
+					#do[1] = do[1] + 1		
+				
+				self.download = RunDload (self, (self.find.get_text(), self.dirchooser.get_filename(),  self.OutputHandler, self.pageno.get_value(), self.autor.get_text(), od, do ))
 				self.ok.hide()
 				self.cancel.show()
 				self.download.start()
@@ -178,6 +201,13 @@ class MugenWindow:
 			self.download.stop()
 			self.cancel.hide()
 			self.ok.show()
+			
+	def CalendarHandle (self, toggle, calendar):
+		if toggle.get_active() == True:
+			calendar.show()
+		else: 
+			calendar.hide()
+		pass
 			
 	def About (self, *arg):
 		dialog = gtk.AboutDialog()                                                                                                                                                                     
